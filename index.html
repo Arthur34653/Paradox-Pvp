@@ -20,6 +20,9 @@
             --bg-ht: rgba(245, 158, 11, 0.15);
             --color-lt: #a855f7;
             --bg-lt: rgba(168, 85, 247, 0.15);
+            
+            --gold: #fbbf24;
+            --silver: #e2e8f0;
         }
 
         * {
@@ -56,10 +59,9 @@
             justify-content: center;
         }
 
-        /* Scale and crop to fit widescreen layouts smoothly */
         .video-background-wrapper iframe {
             width: 100vw;
-            height: 56.25vw; /* 16:9 Aspect Ratio aspect constraint */
+            height: 56.25vw;
             min-height: 100vh;
             min-width: 177.77vh;
             border: none;
@@ -67,7 +69,6 @@
             filter: blur(2px) brightness(0.85) contrast(1.1);
         }
 
-        /* Overlay Vignette to keep interface content legible */
         .video-vignette {
             position: fixed;
             top: 0;
@@ -245,9 +246,8 @@
             cursor: pointer;
         }
 
-        .player-row:nth-child(1) .rank-label { color: #fbbf24; }
-        .player-row:nth-child(2) .rank-label { color: #e2e8f0; }
-        .player-row:nth-child(3) .rank-label { color: #cd7f32; }
+        .player-row:nth-child(1) .rank-label { color: var(--gold); }
+        .player-row:nth-child(2) .rank-label { color: var(--silver); }
 
         .rank-label {
             font-size: 18px;
@@ -330,15 +330,173 @@
         .node-ht { color: var(--color-ht); background: var(--bg-ht); border-color: rgba(245, 158, 11, 0.25); }
         .node-lt { color: var(--color-lt); background: var(--bg-lt); border-color: rgba(168, 85, 247, 0.25); }
 
+        /* Modal / Profile Overlay Setup */
+        .modal-mask {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(4, 6, 10, 0.85);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.25s ease;
+        }
+
+        .modal-mask.open {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .profile-modal {
+            background: #0d1321;
+            border: 1px solid var(--border-ui);
+            width: 100%;
+            max-width: 620px;
+            border-radius: 24px;
+            padding: 32px;
+            position: relative;
+            box-shadow: 0 30px 60px -15px rgba(0,0,0,0.8);
+            transform: scale(0.95);
+            transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .modal-mask.open .profile-modal {
+            transform: scale(1);
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 24px;
+            right: 24px;
+            background: rgba(255,255,255,0.05);
+            border: none;
+            color: var(--text-muted);
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .close-btn:hover { background: rgba(255,255,255,0.1); color: var(--text-main); }
+
+        .profile-top {
+            display: flex;
+            gap: 24px;
+            align-items: center;
+            border-bottom: 1px solid var(--border-ui);
+            padding-bottom: 24px;
+            margin-bottom: 24px;
+        }
+
+        .profile-avatar-wrapper {
+            width: 80px;
+            height: 80px;
+            background: rgba(0,0,0,0.3);
+            border-radius: 16px;
+            border: 1px solid rgba(255,255,255,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .profile-avatar {
+            width: 85%;
+            height: 85%;
+            object-fit: contain;
+            image-rendering: pixelated;
+        }
+
+        .profile-meta h2 {
+            font-size: 24px;
+            font-weight: 800;
+            margin-bottom: 6px;
+        }
+
+        .badge-strip {
+            display: flex;
+            gap: 6px;
+            margin-top: 8px;
+        }
+
+        .badge-node {
+            font-size: 10px;
+            text-transform: uppercase;
+            font-weight: 800;
+            padding: 2px 8px;
+            border-radius: 4px;
+            background: rgba(255,255,255,0.08);
+            letter-spacing: 0.5px;
+        }
+        .b-staff { background: rgba(239, 68, 68, 0.2); color: #f87171; }
+        .b-top10 { background: rgba(245, 158, 11, 0.2); color: #fbbf24; }
+        .b-tourney { background: rgba(56, 189, 248, 0.2); color: #38bdf8; }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .stat-card {
+            background: rgba(0,0,0,0.25);
+            border: 1px solid rgba(255,255,255,0.03);
+            border-radius: 12px;
+            padding: 14px;
+            text-align: center;
+        }
+        .stat-card .label { font-size: 11px; color: var(--text-muted); text-transform: uppercase; font-weight: 700; margin-bottom: 4px; }
+        .stat-card .value { font-size: 18px; font-weight: 800; color: var(--text-main); }
+
+        .all-modes-header {
+            font-size: 12px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            letter-spacing: 0.5px;
+            margin-bottom: 12px;
+            font-weight: 800;
+        }
+
+        .all-modes-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+        }
+
+        .mode-tier-item {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid rgba(255,255,255,0.04);
+            border-radius: 8px;
+            padding: 8px 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 13px;
+        }
+        .mode-tier-item .m-name { font-weight: 600; color: #94a3b8; }
+        .mode-tier-item .m-val { font-weight: 800; }
+        .m-ht { color: var(--color-ht); }
+        .m-lt { color: var(--color-lt); }
+
         @media (max-width: 900px) {
             .row-grid { grid-template-columns: 45px 70px 1fr 80px; }
             .tier-matrix-row, .table-header .text-right { display: none; }
+            .stats-grid, .all-modes-grid { grid-template-columns: repeat(2, 1fr); }
         }
     </style>
 </head>
 <body>
 
-<!-- Fixed Background Container using specific video embed properties -->
 <div class="video-background-wrapper">
     <iframe src="https://www.tiktok.com/player/v1/7526033644478057736?autoplay=1&mute=1&loop=1&controls=0" allow="autoplay; encrypted-media"></iframe>
 </div>
@@ -351,7 +509,6 @@
     </div>
 
     <div class="category-nav-bar">
-        <!-- Tabs go here -->
         <div class="nav-tab active" data-mode="overall">
             <div class="nav-tab-icon-wrapper"><svg viewBox="0 0 24 24"><path d="M18 2H6c-1.1 0-2 .9-2 2v1c0 2.76 2.24 5 5 5h1v4H8c-1.66 0-3 1.34-3 3v2h14v-2c0-1.66-1.34-3-3-3h-2v-4h1c2.76 0 5-2.24 5-5V4c0-1.1-.9-2-2-2zm2 3c0 1.65-1.35 3-3 3h-1V4h4v1zM6 8c-1.65 0-3-1.35-3-3V4h4v4H6zm10 11H8v-1c0-.55.45-1 1-1h6c.55 0 1 .45 1 1v1z"/></svg></div>
             <span class="nav-tab-label">Overall</span>
@@ -407,13 +564,74 @@
     </div>
 </div>
 
+<div class="modal-mask" id="profile-modal-mask" onclick="closeProfile()">
+    <div class="profile-modal" onclick="event.stopPropagation()">
+        <button class="close-btn" onclick="closeProfile()">×</button>
+        
+        <div class="profile-top">
+            <div class="profile-avatar-wrapper">
+                <img id="p-avatar" src="" class="profile-avatar" alt="Skin Head">
+            </div>
+            <div class="profile-meta">
+                <h2 id="p-username">---</h2>
+                <div><span id="p-region" class="region-badge">---</span></div>
+                <div class="badge-strip" id="p-badges"></div>
+            </div>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="label">Overall Tier</div>
+                <div class="value" id="p-stat-tier" style="color:var(--color-ht);">---</div>
+            </div>
+            <div class="stat-card">
+                <div class="label">Win / Loss</div>
+                <div class="value" id="p-stat-wl">0.0</div>
+            </div>
+            <div class="stat-card">
+                <div class="label">Matches</div>
+                <div class="value" id="p-stat-matches">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="label">Peak Elo</div>
+                <div class="value" id="p-stat-elo" style="color:#38bdf8;">0</div>
+            </div>
+            <div class="stat-card" style="grid-column: span 2;">
+                <div class="label">Rank History</div>
+                <div class="value" style="font-size:13px; color:var(--text-muted); font-weight:500; margin-top:4px;">📈 Consistent Peak Tier Status</div>
+            </div>
+        </div>
+
+        <div class="all-modes-header">All Gamemode Tiers</div>
+        <div class="all-modes-grid" id="p-modes-grid"></div>
+    </div>
+</div>
+
 <script>
+    // Configured Database featuring your specified top layout structure
     const playersDatabase = [
-        { name: "ItzRealMe", region: "NA", points: 330, status: "Combat Master", tiers: { overall: "HT3", ltms: "HT3", vanilla: "HT1", uhc: "HT1", pot: "LT1", nethop: "HT2", smp: "HT3", sword: "HT1", axe: "HT1", mace: "LT1" }},
-        { name: "coldified", region: "EU", points: 326, status: "Combat Master", tiers: { overall: "LT1", ltms: "LT1", vanilla: "LT3", uhc: "HT1", pot: "HT2", nethop: "LT1", smp: "LT2", sword: "LT1", axe: "LT3", mace: "HT2" }},
-        { name: "Swight", region: "NA", points: 290, status: "Combat Master", tiers: { overall: "HT3", ltms: "LT3", vanilla: "HT1", uhc: "HT2", pot: "HT1", nethop: "LT2", smp: "HT1", sword: "HT3", axe: "LT3", mace: "HT1" }},
-        { name: "janekv", region: "EU", points: 260, status: "Combat Master", tiers: { overall: "LT3", ltms: "LT3", vanilla: "HT1", uhc: "LT1", pot: "HT2", nethop: "HT1", smp: "LT3", sword: "LT3", axe: "LT3", mace: "HT1" }},
-        { name: "BlvckWlf", region: "EU", points: 226, status: "Combat Ace", tiers: { overall: "HT3", ltms: "HT1", vanilla: "LT1", uhc: "LT3", pot: "HT3", nethop: "LT2", smp: "HT1", sword: "HT3", axe: "LT1", mace: "LT2" }}
+        { 
+            name: "ITZREALHARRY", 
+            region: "EU", 
+            points: 420, 
+            status: "Grandmaster", 
+            badges: ["staff", "top10", "tourney"],
+            wl: "4.82",
+            matches: 1240,
+            peakElo: 2450,
+            tiers: { overall: "HT1", ltms: "HT1", vanilla: "HT1", uhc: "HT1", pot: "HT1", nethop: "HT1", smp: "HT2", sword: "HT1", axe: "HT1", mace: "HT1" }
+        },
+        { 
+            name: "ZenithTG", 
+            region: "NA", 
+            points: 395, 
+            status: "Elite Combatant", 
+            badges: ["top10", "tourney"],
+            wl: "3.50",
+            matches: 980,
+            peakElo: 2210,
+            tiers: { overall: "HT2", ltms: "HT2", vanilla: "HT1", uhc: "HT2", pot: "LT1", nethop: "HT2", smp: "HT1", sword: "HT1", axe: "LT1", mace: "HT2" }
+        }
     ];
 
     const container = document.getElementById('leaderboard-container');
@@ -432,6 +650,7 @@
         sortedPlayers.forEach((player, index) => {
             const row = document.createElement('div');
             row.className = `row-grid player-row`;
+            row.setAttribute('onclick', `openProfile("${player.name}")`);
             
             let tierDisplayHTML = '';
             if (mode === 'overall') {
@@ -464,6 +683,54 @@
             `;
             container.appendChild(row);
         });
+    }
+
+    // Modal Control Logic
+    function openProfile(username) {
+        const player = playersDatabase.find(p => p.name === username);
+        if (!player) return;
+
+        document.getElementById('p-avatar').src = `https://mc-heads.net/head/${player.name}/100`;
+        document.getElementById('p-username').textContent = player.name;
+        
+        const regNode = document.getElementById('p-region');
+        regNode.textContent = player.region;
+        regNode.className = `region-badge reg-${player.region.toLowerCase()}`;
+
+        // Dynamic Badge rendering
+        const badgeBox = document.getElementById('p-badges');
+        badgeBox.innerHTML = '';
+        player.badges.forEach(b => {
+            const span = document.createElement('span');
+            span.className = `badge-node b-${b}`;
+            span.textContent = b === 'top10' ? 'Top 10' : b === 'tourney' ? 'Champion' : b;
+            badgeBox.appendChild(span);
+        });
+
+        // Numerical Metric Loading
+        document.getElementById('p-stat-tier').textContent = player.tiers.overall;
+        document.getElementById('p-stat-wl').textContent = player.wl;
+        document.getElementById('p-stat-matches').textContent = player.matches;
+        document.getElementById('p-stat-elo').textContent = player.peakElo;
+
+        // Populate Comprehensive Gamemode breakdown
+        const grid = document.getElementById('p-modes-grid');
+        grid.innerHTML = '';
+        Object.entries(player.tiers).forEach(([mode, tier]) => {
+            if (mode === 'overall') return;
+            const isHT = tier.startsWith('HT');
+            grid.innerHTML += `
+                <div class="mode-tier-item">
+                    <span class="m-name">${mode.toUpperCase()}</span>
+                    <span class="m-val ${isHT ? 'm-ht' : 'm-lt'}">${tier}</span>
+                </div>`;
+        });
+
+        document.getElementById('profile-modal-mask').classList.add('open');
+    }
+
+    function closeProfile() {
+        document.getElementById('profile-modal-mask').classList.remove('open');
     }
 
     tabs.forEach(tab => {
