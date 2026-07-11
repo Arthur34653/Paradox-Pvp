@@ -6,23 +6,31 @@
     <title>ᴘᴀʀᴀᴅᴏx-ᴘᴠᴘ — Rankings</title>
     <style>
         :root {
-            --bg-base: #090d16;
-            --bg-panel: rgba(10, 15, 30, 0.75);
-            --bg-row-hover: rgba(30, 41, 59, 0.5);
-            --border-ui: rgba(255, 255, 255, 0.08);
+            --bg-base: #02040a;
+            --bg-panel: rgba(6, 10, 23, 0.65);
+            --bg-row: rgba(10, 17, 36, 0.5);
+            --bg-row-hover: rgba(24, 37, 70, 0.7);
+            --border-ui: rgba(255, 255, 255, 0.07);
             
             --text-main: #f8fafc;
-            --text-muted: #64748b;
-            --color-na: #ef4444;
-            --color-eu: #10b981;
+            --text-muted: #94a3b8;
+            --color-na: #f87171;
+            --color-eu: #34d399;
 
-            --color-ht: #f59e0b;
-            --bg-ht: rgba(245, 158, 11, 0.15);
-            --color-lt: #a855f7;
-            --bg-lt: rgba(168, 85, 247, 0.15);
+            --color-ht: #fbbf24;
+            --bg-ht: rgba(251, 191, 36, 0.1);
+            --color-lt: #c084fc;
+            --bg-lt: rgba(192, 132, 252, 0.1);
             
-            --gold: #fbbf24;
-            --silver: #e2e8f0;
+            --gold: #f59e0b;
+            --silver: #94a3b8;
+            --bronze: #b45309;
+            --accent: #38bdf8;
+            
+            /* High-Aura Custom Gradients */
+            --glow-cyan: linear-gradient(135deg, #06b6d4, #3b82f6);
+            --glow-purple: linear-gradient(135deg, #a855f7, #ec4899);
+            --glow-gold: linear-gradient(135deg, #eab308, #f97316);
         }
 
         * {
@@ -43,7 +51,7 @@
             position: relative;
         }
 
-        /* Fixed Background Container for TikTok Embed */
+        /* Ambient Video Background Layer - Made Highly Visible */
         .video-background-wrapper {
             position: fixed;
             top: 50%;
@@ -65,8 +73,8 @@
             min-height: 100vh;
             min-width: 177.77vh;
             border: none;
-            opacity: 0.35;
-            filter: blur(2px) brightness(0.85) contrast(1.1);
+            opacity: 0.55; /* Boosted opacity to clearly showcase the video */
+            filter: blur(2px) brightness(0.65);
         }
 
         .video-vignette {
@@ -77,12 +85,12 @@
             height: 100%;
             z-index: -1;
             pointer-events: none;
-            background: radial-gradient(circle, rgba(9, 13, 22, 0.2) 0%, rgba(9, 13, 22, 0.92) 100%);
+            background: radial-gradient(circle at center, rgba(2, 4, 10, 0.1) 0%, rgba(2, 4, 10, 0.75) 100%);
         }
 
         .wrapper {
             width: 100%;
-            max-width: 1000px;
+            max-width: 1100px;
             display: flex;
             flex-direction: column;
             gap: 24px;
@@ -92,405 +100,267 @@
         .brand-header {
             display: flex;
             align-items: center;
-            gap: 12px;
+            justify-content: center;
+            margin-bottom: 5px;
         }
 
         .brand-title {
-            font-size: 24px;
-            font-weight: 800;
-            letter-spacing: 0.5px;
+            font-size: 40px;
+            font-weight: 900;
+            letter-spacing: 5px;
             text-transform: uppercase;
+            background: linear-gradient(to bottom, #ffffff 50%, #cbd5e1 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 15px rgba(0,0,0,0.6));
         }
 
-        /* Category Tabs Navigation Bar */
+        /* High-Aura Premium Horizontal Navigation Bar */
         .category-nav-bar {
             display: flex;
-            gap: 6px;
-            padding: 8px 4px 0 4px;
+            gap: 10px;
+            padding: 10px;
+            background: rgba(6, 10, 26, 0.8);
+            border: 2px solid rgba(255, 255, 255, 0.08);
+            border-radius: 18px;
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
             overflow-x: auto;
             scrollbar-width: none;
-            border-bottom: 1px solid var(--border-ui);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
         }
-        .category-nav-bar::-webkit-scrollbar {
-            display: none;
-        }
+        .category-nav-bar::-webkit-scrollbar { display: none; }
 
         .nav-tab {
             display: flex;
-            flex-direction: column;
             align-items: center;
             justify-content: center;
-            gap: 8px;
-            min-width: 82px;
-            padding: 12px 10px;
-            background: rgba(10, 15, 30, 0.4);
-            border: 1px solid var(--border-ui);
-            border-bottom: none;
-            border-top-left-radius: 14px;
-            border-top-right-radius: 14px;
+            gap: 10px;
+            padding: 10px 18px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
             cursor: pointer;
-            transition: all 0.2s ease;
-            position: relative;
+            min-width: 130px;
+            flex-shrink: 0;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .nav-tab-icon-wrapper {
-            width: 24px;
-            height: 24px;
+            width: 22px;
+            height: 22px;
             display: flex;
             align-items: center;
             justify-content: center;
-            opacity: 0.5;
-            transition: transform 0.2s ease, opacity 0.2s ease;
+            transition: transform 0.2s ease;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
         }
 
-        .nav-tab-icon-wrapper svg {
-            width: 100%;
-            height: 100%;
-            fill: currentColor;
-        }
-
-        .nav-tab-label {
-            font-size: 11px;
-            font-weight: 700;
-            color: var(--text-muted);
-            transition: color 0.2s ease;
-        }
+        .nav-tab-icon-wrapper svg { width: 100%; height: 100%; }
+        .nav-tab-label { font-size: 13px; font-weight: 800; color: var(--text-muted); letter-spacing: 0.5px; }
 
         .nav-tab:hover {
-            background: rgba(30, 41, 59, 0.5);
+            background: rgba(255, 255, 255, 0.06);
             border-color: rgba(255, 255, 255, 0.15);
-        }
-        .nav-tab:hover .nav-tab-icon-wrapper {
-            transform: translateY(-2px);
-            opacity: 0.8;
+            transform: translateY(-1px);
         }
 
+        /* Vibrant Active States matching Item Themes */
         .nav-tab.active {
-            background: var(--bg-panel);
-            border-color: var(--border-ui);
-            border-bottom: 1px solid transparent;
-            z-index: 2;
+            background: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
         }
-        .nav-tab.active .nav-tab-label {
-            color: var(--text-main);
-        }
-        .nav-tab.active .nav-tab-icon-wrapper {
-            opacity: 1;
-            transform: scale(1.05);
-        }
-        
-        .nav-tab.active .nav-tab-icon-wrapper { color: #38bdf8; }
-        .nav-tab[data-mode="overall"].active .nav-tab-icon-wrapper { color: #fbbf24; }
+        .nav-tab.active .nav-tab-label { color: var(--text-main); }
+        .nav-tab.active .nav-tab-icon-wrapper { transform: scale(1.15); }
 
-        .nav-tab.active::after {
-            content: '';
-            position: absolute;
-            bottom: -1px;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background-color: #38bdf8;
-        }
-        .nav-tab[data-mode="overall"].active::after {
-            background-color: #fbbf24;
+        .nav-tab[data-mode="overall"].active { border: 2px solid #eab308; box-shadow: 0 0 15px rgba(234, 179, 8, 0.25); }
+        .nav-tab[data-mode="ltms"].active { border: 2px solid #94a3b8; box-shadow: 0 0 15px rgba(148, 163, 184, 0.25); }
+        .nav-tab[data-mode="vanilla"].active { border: 2px solid #a855f7; box-shadow: 0 0 15px rgba(168, 85, 247, 0.3); }
+        .nav-tab[data-mode="uhc"].active { border: 2px solid #ef4444; box-shadow: 0 0 15px rgba(239, 68, 68, 0.3); }
+        .nav-tab[data-mode="pot"].active { border: 2px solid #f43f5e; box-shadow: 0 0 15px rgba(244, 63, 94, 0.3); }
+        .nav-tab[data-mode="nethop"].active { border: 2px solid #7c3aed; box-shadow: 0 0 15px rgba(124, 58, 237, 0.3); }
+        .nav-tab[data-mode="smp"].active { border: 2px solid #14b8a6; box-shadow: 0 0 15px rgba(20, 184, 166, 0.3); }
+        .nav-tab[data-mode="sword"].active { border: 2px solid #38bdf8; box-shadow: 0 0 15px rgba(56, 189, 248, 0.3); }
+        .nav-tab[data-mode="axe"].active { border: 2px solid #0284c7; box-shadow: 0 0 15px rgba(2, 132, 199, 0.3); }
+        .nav-tab[data-mode="mace"].active { border: 2px solid #64748b; box-shadow: 0 0 15px rgba(100, 116, 139, 0.3); }
+
+        /* Premium Custom Vanilla Card Override */
+        .player-row.vanilla-styled {
+            background: linear-gradient(135deg, rgba(12, 8, 28, 0.65) 0%, rgba(22, 17, 48, 0.8) 100%);
+            border: 2px solid rgba(168, 85, 247, 0.35);
+            box-shadow: inset 0 0 15px rgba(168, 85, 247, 0.1);
+            position: relative;
         }
 
-        /* Main Leaderboard Table Panel */
+        .player-row.vanilla-styled::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%;
+            background: linear-gradient(to bottom, #38bdf8, #a855f7);
+            box-shadow: 0 0 12px rgba(168, 85, 247, 0.6);
+        }
+
+        .player-row.vanilla-styled:hover {
+            border-color: rgba(168, 85, 247, 0.7);
+            box-shadow: 0 0 25px rgba(168, 85, 247, 0.25);
+            transform: translateY(-2px);
+        }
+
+        .vanilla-frame {
+            border: 2px solid #a855f7 !important;
+            box-shadow: 0 0 10px rgba(168, 85, 247, 0.4);
+            background: #020617 !important;
+        }
+
+        .node-vanilla-ht {
+            color: #f472b6 !important;
+            background: rgba(244, 114, 182, 0.15) !important;
+            border: 1px solid rgba(244, 114, 182, 0.3) !important;
+            text-shadow: 0 0 8px rgba(244, 114, 182, 0.5);
+            font-weight: 800;
+        }
+
+        /* Glass Leaderboard Framework */
         .leaderboard-panel {
             background-color: var(--bg-panel);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            border: 1px solid var(--border-ui);
-            border-top: none;
-            border-bottom-left-radius: 16px;
-            border-bottom-right-radius: 16px;
-            padding: 16px;
-            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.7);
+            border: 2px solid var(--border-ui);
+            border-radius: 24px;
+            padding: 24px;
+            box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.8);
         }
 
         .row-grid {
             display: grid;
-            grid-template-columns: 55px 75px 1fr 100px 240px;
+            grid-template-columns: 60px 75px 1fr 120px 260px;
             align-items: center;
-            padding: 14px 20px;
+            padding: 16px 24px;
         }
 
         .table-header {
             color: var(--text-muted);
             font-size: 11px;
-            font-weight: 700;
+            font-weight: 800;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            border-bottom: 1px solid var(--border-ui);
-            padding-bottom: 12px;
-            margin-bottom: 8px;
+            letter-spacing: 1.5px;
+            border-bottom: 2px solid var(--border-ui);
+            padding-bottom: 16px;
+            margin-bottom: 12px;
         }
 
         .text-right { text-align: right; }
+        .leaderboard-list { display: flex; flex-direction: column; gap: 10px; }
 
-        .leaderboard-list {
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-        }
-
+        /* Sleek Modern Rows */
         .player-row {
-            border-radius: 12px;
-            transition: background-color 0.15s ease, border-color 0.15s ease;
-            border: 1px solid transparent;
+            border-radius: 14px;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid var(--border-ui);
+            background: var(--bg-row);
         }
 
         .player-row:hover {
             background-color: var(--bg-row-hover);
-            border-color: rgba(255, 255, 255, 0.05);
+            border-color: rgba(56, 189, 248, 0.35);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.6);
+            transform: translateY(-2px);
             cursor: pointer;
         }
 
-        .player-row:nth-child(1) .rank-label { color: var(--gold); }
-        .player-row:nth-child(2) .rank-label { color: var(--silver); }
+        /* Podium Accent Styling */
+        .player-row:nth-child(1) { border-color: rgba(245, 158, 11, 0.25); background: linear-gradient(90deg, rgba(245, 158, 11, 0.04) 0%, var(--bg-row) 100%); }
+        .player-row:nth-child(2) { border-color: rgba(148, 163, 184, 0.25); background: linear-gradient(90deg, rgba(148, 163, 184, 0.04) 0%, var(--bg-row) 100%); }
+        .player-row:nth-child(3) { border-color: rgba(180, 83, 9, 0.25); background: linear-gradient(90deg, rgba(180, 83, 9, 0.04) 0%, var(--bg-row) 100%); }
 
-        .rank-label {
-            font-size: 18px;
-            font-weight: 800;
-            font-style: italic;
-            color: var(--text-muted);
-        }
+        .player-row:nth-child(1) .rank-label { color: var(--gold); text-shadow: 0 0 15px rgba(245, 158, 11, 0.4); }
+        .player-row:nth-child(2) .rank-label { color: var(--silver); text-shadow: 0 0 15px rgba(148, 163, 184, 0.4); }
+        .player-row:nth-child(3) .rank-label { color: var(--bronze); text-shadow: 0 0 15px rgba(180, 83, 9, 0.4); }
+
+        .rank-label { font-size: 18px; font-weight: 900; font-style: italic; color: #475569; }
 
         .skin-box {
-            position: relative;
-            width: 48px;
-            height: 48px;
-            background: rgba(0, 0, 0, 0.4);
-            border-radius: 10px;
+            position: relative; width: 44px; height: 44px;
+            background: #020617; border-radius: 8px;
             border: 1px solid rgba(255, 255, 255, 0.1);
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            overflow: hidden; display: flex; align-items: center; justify-content: center;
         }
 
-        .skin-avatar {
-            width: 95%;
-            height: 95%;
-            object-fit: contain;
-            image-rendering: pixelated;
-        }
-
-        .player-identity {
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-            padding-left: 8px;
-        }
-
-        .username {
-            font-size: 16px;
-            font-weight: 700;
-            color: var(--text-main);
-        }
-
-        .rank-status {
-            font-size: 12px;
-            color: var(--text-muted);
-        }
-
-        .points {
-            color: rgba(255, 255, 255, 0.4);
-            font-weight: 400;
-        }
+        .skin-avatar { width: 85%; height: 85%; object-fit: contain; image-rendering: pixelated; }
+        .player-identity { display: flex; flex-direction: column; gap: 4px; padding-left: 4px; }
+        .username { font-size: 16px; font-weight: 700; color: var(--text-main); letter-spacing: 0.3px; }
+        .rank-status { font-size: 12px; color: #64748b; }
+        .points { color: var(--accent); font-weight: 700; text-shadow: 0 0 10px rgba(56, 189, 248, 0.2); }
 
         .region-badge {
-            font-size: 11px;
-            font-weight: 800;
-            padding: 3px 8px;
-            border-radius: 6px;
-            width: fit-content;
-            text-align: center;
+            font-size: 10px; font-weight: 800; padding: 4px 10px; border-radius: 6px; width: fit-content; text-align: center; letter-spacing: 0.5px;
         }
-        .reg-na { color: var(--color-na); background: rgba(239, 68, 68, 0.15); }
-        .reg-eu { color: var(--color-eu); background: rgba(16, 185, 129, 0.15); }
+        .reg-na { color: var(--color-na); background: rgba(248, 113, 113, 0.1); border: 1px solid rgba(248, 113, 113, 0.2); }
+        .reg-eu { color: var(--color-eu); background: rgba(52, 211, 153, 0.1); border: 1px solid rgba(52, 211, 153, 0.2); }
 
-        .tier-matrix-row {
-            display: flex;
-            gap: 6px;
-            justify-content: flex-end;
-        }
+        .tier-matrix-row { display: flex; gap: 8px; justify-content: flex-end; }
 
         .tier-node {
-            display: inline-flex;
-            align-items: center;
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 800;
-            background: rgba(0, 0, 0, 0.4);
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            display: inline-flex; align-items: center; padding: 5px 12px; border-radius: 20px; font-size: 11px; font-weight: 800;
+            background: rgba(0, 0, 0, 0.3); border: 1px solid rgba(255, 255, 255, 0.05);
         }
+        .node-ht { color: var(--color-ht); background: var(--bg-ht); border-color: rgba(251, 191, 36, 0.25); text-shadow: 0 0 8px rgba(251, 191, 36, 0.3); }
+        .node-lt { color: var(--color-lt); background: var(--bg-lt); border-color: rgba(192, 132, 252, 0.25); text-shadow: 0 0 8px rgba(192, 132, 252, 0.3); }
 
-        .node-ht { color: var(--color-ht); background: var(--bg-ht); border-color: rgba(245, 158, 11, 0.25); }
-        .node-lt { color: var(--color-lt); background: var(--bg-lt); border-color: rgba(168, 85, 247, 0.25); }
+        .no-data-msg { text-align: center; padding: 40px; color: var(--text-muted); font-size: 14px; font-style: italic; }
 
-        /* Modal / Profile Overlay Setup */
+        /* Smooth Cinematic Profile Modal Overlay */
         .modal-mask {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: rgba(4, 6, 10, 0.85);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            z-index: 100;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.25s ease;
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(2, 6, 23, 0.9);
+            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); z-index: 100;
+            display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: opacity 0.3s ease;
         }
 
-        .modal-mask.open {
-            opacity: 1;
-            pointer-events: auto;
-        }
+        .modal-mask.open { opacity: 1; pointer-events: auto; }
 
         .profile-modal {
-            background: #0d1321;
-            border: 1px solid var(--border-ui);
-            width: 100%;
-            max-width: 620px;
-            border-radius: 24px;
-            padding: 32px;
-            position: relative;
-            box-shadow: 0 30px 60px -15px rgba(0,0,0,0.8);
-            transform: scale(0.95);
-            transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            background: linear-gradient(180deg, #0f172a 0%, #060a12 100%); 
+            border: 2px solid rgba(255, 255, 255, 0.08); width: 100%; max-width: 600px; border-radius: 24px;
+            padding: 36px; position: relative; box-shadow: 0 50px 100px -20px rgba(0,0,0,0.9);
+            transform: scale(0.96); transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
 
-        .modal-mask.open .profile-modal {
-            transform: scale(1);
-        }
+        .modal-mask.open .profile-modal { transform: scale(1); }
 
         .close-btn {
-            position: absolute;
-            top: 24px;
-            right: 24px;
-            background: rgba(255,255,255,0.05);
-            border: none;
-            color: var(--text-muted);
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            cursor: pointer;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            position: absolute; top: 24px; right: 24px; background: rgba(255,255,255,0.04); border: none;
+            color: var(--text-muted); width: 32px; height: 32px; border-radius: 50%; cursor: pointer;
+            font-size: 16px; display: flex; align-items: center; justify-content: center; transition: all 0.2s;
         }
-        .close-btn:hover { background: rgba(255,255,255,0.1); color: var(--text-main); }
+        .close-btn:hover { background: rgba(255,255,255,0.08); color: var(--text-main); }
 
-        .profile-top {
-            display: flex;
-            gap: 24px;
-            align-items: center;
-            border-bottom: 1px solid var(--border-ui);
-            padding-bottom: 24px;
-            margin-bottom: 24px;
-        }
+        .profile-top { display: flex; gap: 24px; align-items: center; border-bottom: 2px solid var(--border-ui); padding-bottom: 24px; margin-bottom: 24px; }
+        .profile-avatar-wrapper { width: 80px; height: 80px; background: #020617; border-radius: 14px; border: 1px solid rgba(255, 255, 255, 0.1); display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 20px rgba(0,0,0,0.4); }
+        .profile-avatar { width: 80%; height: 80%; object-fit: contain; image-rendering: pixelated; }
+        .profile-meta h2 { font-size: 26px; font-weight: 800; margin-bottom: 6px; letter-spacing: 0.5px; }
 
-        .profile-avatar-wrapper {
-            width: 80px;
-            height: 80px;
-            background: rgba(0,0,0,0.3);
-            border-radius: 16px;
-            border: 1px solid rgba(255,255,255,0.1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+        .badge-strip { display: flex; gap: 6px; margin-top: 12px; }
+        .badge-node { font-size: 10px; text-transform: uppercase; font-weight: 800; padding: 4px 12px; border-radius: 6px; background: rgba(255,255,255,0.04); letter-spacing: 0.5px; }
+        .b-staff { background: rgba(239, 68, 68, 0.1); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.15); }
+        .b-top10 { background: rgba(245, 158, 11, 0.1); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.15); }
+        .b-tourney { background: rgba(56, 189, 248, 0.1); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.15); }
 
-        .profile-avatar {
-            width: 85%;
-            height: 85%;
-            object-fit: contain;
-            image-rendering: pixelated;
-        }
+        .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 28px; }
+        .stat-card { background: rgba(2, 6, 23, 0.4); border: 1px solid rgba(255, 255, 255, 0.04); border-radius: 12px; padding: 16px; text-align: center; }
+        .stat-card .label { font-size: 10px; color: var(--text-muted); text-transform: uppercase; font-weight: 800; margin-bottom: 6px; letter-spacing: 0.8px; }
+        .stat-card .value { font-size: 20px; font-weight: 800; color: var(--text-main); }
 
-        .profile-meta h2 {
-            font-size: 24px;
-            font-weight: 800;
-            margin-bottom: 6px;
-        }
-
-        .badge-strip {
-            display: flex;
-            gap: 6px;
-            margin-top: 8px;
-        }
-
-        .badge-node {
-            font-size: 10px;
-            text-transform: uppercase;
-            font-weight: 800;
-            padding: 2px 8px;
-            border-radius: 4px;
-            background: rgba(255,255,255,0.08);
-            letter-spacing: 0.5px;
-        }
-        .b-staff { background: rgba(239, 68, 68, 0.2); color: #f87171; }
-        .b-top10 { background: rgba(245, 158, 11, 0.2); color: #fbbf24; }
-        .b-tourney { background: rgba(56, 189, 248, 0.2); color: #38bdf8; }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 16px;
-            margin-bottom: 24px;
-        }
-
-        .stat-card {
-            background: rgba(0,0,0,0.25);
-            border: 1px solid rgba(255,255,255,0.03);
-            border-radius: 12px;
-            padding: 14px;
-            text-align: center;
-        }
-        .stat-card .label { font-size: 11px; color: var(--text-muted); text-transform: uppercase; font-weight: 700; margin-bottom: 4px; }
-        .stat-card .value { font-size: 18px; font-weight: 800; color: var(--text-main); }
-
-        .all-modes-header {
-            font-size: 12px;
-            text-transform: uppercase;
-            color: var(--text-muted);
-            letter-spacing: 0.5px;
-            margin-bottom: 12px;
-            font-weight: 800;
-        }
-
-        .all-modes-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 8px;
-        }
-
-        .mode-tier-item {
-            background: rgba(255,255,255,0.02);
-            border: 1px solid rgba(255,255,255,0.04);
-            border-radius: 8px;
-            padding: 8px 12px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 13px;
-        }
-        .mode-tier-item .m-name { font-weight: 600; color: #94a3b8; }
+        .all-modes-header { font-size: 11px; text-transform: uppercase; color: var(--text-muted); letter-spacing: 1.5px; margin-bottom: 14px; font-weight: 800; }
+        .all-modes-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+        
+        .mode-tier-item { background: rgba(2, 6, 23, 0.25); border: 1px solid rgba(255, 255, 255, 0.03); border-radius: 8px; padding: 12px 16px; display: flex; justify-content: space-between; align-items: center; font-size: 12px; }
+        .mode-tier-item .m-name { font-weight: 700; color: #64748b; letter-spacing: 0.5px; }
         .mode-tier-item .m-val { font-weight: 800; }
         .m-ht { color: var(--color-ht); }
         .m-lt { color: var(--color-lt); }
 
-        @media (max-width: 900px) {
-            .row-grid { grid-template-columns: 45px 70px 1fr 80px; }
+        @media (max-width: 950px) {
+            .row-grid { grid-template-columns: 50px 70px 1fr 100px; }
             .tier-matrix-row, .table-header .text-right { display: none; }
+            .category-nav-bar { display: flex; }
             .stats-grid, .all-modes-grid { grid-template-columns: repeat(2, 1fr); }
         }
     </style>
@@ -498,55 +368,130 @@
 <body>
 
 <div class="video-background-wrapper">
-    <iframe src="https://www.tiktok.com/player/v1/7526033644478057736?autoplay=1&mute=1&loop=1&controls=0" allow="autoplay; encrypted-media"></iframe>
+    <iframe id="bg-video" src="https://www.tiktok.com/player/v1/7526033644478057736?autoplay=1&mute=0&loop=1&controls=0" allow="autoplay; encrypted-media"></iframe>
 </div>
 <div class="video-vignette"></div>
 
 <div class="wrapper">
-
     <div class="brand-header">
         <h1 class="brand-title">ᴘᴀʀᴀᴅᴏx-ᴘᴠᴘ</h1>
     </div>
 
+    <!-- Redesigned High-End Navigation Bar -->
     <div class="category-nav-bar">
+        <!-- 1. Overall -->
         <div class="nav-tab active" data-mode="overall">
-            <div class="nav-tab-icon-wrapper"><svg viewBox="0 0 24 24"><path d="M18 2H6c-1.1 0-2 .9-2 2v1c0 2.76 2.24 5 5 5h1v4H8c-1.66 0-3 1.34-3 3v2h14v-2c0-1.66-1.34-3-3-3h-2v-4h1c2.76 0 5-2.24 5-5V4c0-1.1-.9-2-2-2zm2 3c0 1.65-1.35 3-3 3h-1V4h4v1zM6 8c-1.65 0-3-1.35-3-3V4h4v4H6zm10 11H8v-1c0-.55.45-1 1-1h6c.55 0 1 .45 1 1v1z"/></svg></div>
+            <div class="nav-tab-icon-wrapper">
+                <svg viewBox="0 0 32 32">
+                    <path d="M26 6h-2V4a2 2 0 0 0-2-2H10a2 2 0 0 0-2 2v2H6a3 3 0 0 0-3 3v3a6 6 0 0 0 5.2 5.9A7 7 0 0 0 14 23.9V26h-3a2 2 0 0 0-2 2v2h14v-2a2 2 0 0 0-2-2h-3v-2.1a7 7 0 0 0 5.8-6A6 6 0 0 0 29 12V9a3 3 0 0 0-3-3zM5 12V9a1 1 0 0 1 1-1h2v5.2A4.9 4.9 0 0 1 5 12zm22 0a4.9 4.9 0 0 1-3 1.2V8h2a1 1 0 0 1 1 1z" fill="#f59e0b"/>
+                </svg>
+            </div>
             <span class="nav-tab-label">Overall</span>
         </div>
+        
+        <!-- 2. LTMs -->
         <div class="nav-tab" data-mode="ltms">
-            <div class="nav-tab-icon-wrapper"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg></div>
+            <div class="nav-tab-icon-wrapper">
+                <svg viewBox="0 0 32 32">
+                    <path d="M27.2 4.8a3.1 3.1 0 0 0-4.4 0l-5.3 5.3-2.8-2.8a1 1 0 0 0-1.4 0L3.5 17.1a2 2 0 0 0 0 2.8l2.6 2.6-3.8 3.9a1 1 0 0 0 0 1.4l1.4 1.4a1 1 0 0 0 1.4 0l3.9-3.8 2.6 2.6a2 2 0 0 0 2.8 0l9.8-9.8a1 1 0 0 0 0-1.4l-2.8-2.8 5.3-5.3a3.1 3.1 0 0 0 0-4.4z" fill="#cbd5e1"/>
+                    <path d="M4.8 4.8a3.1 3.1 0 0 1 4.4 0l5.3 5.3 2.8-2.8a1 1 0 0 1 1.4 0l9.8 9.8a2 2 0 0 1 0 2.8l-2.6 2.6 3.8 3.9a1 1 0 0 1 0 1.4l-1.4 1.4a1 1 0 0 1-1.4 0l-3.9-3.8-2.6 2.6a2 2 0 0 1-2.8 0l-9.8-9.8a1 1 0 0 1 0-1.4l2.8-2.8-5.3-5.3a3.1 3.1 0 0 1 0-4.4z" fill="#94a3b8"/>
+                </svg>
+            </div>
             <span class="nav-tab-label">LTMs</span>
         </div>
+        
+        <!-- 3. Vanilla -->
         <div class="nav-tab" data-mode="vanilla">
-            <div class="nav-tab-icon-wrapper"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
+            <div class="nav-tab-icon-wrapper">
+                <svg viewBox="0 0 32 32">
+                    <rect x="6" y="6" width="20" height="20" rx="6" fill="none" stroke="#f1f5f9" stroke-width="2.5"/>
+                    <path d="M16 8l6 5v8l-6 5-6-5v-8z" fill="#a855f7"/>
+                    <polygon points="16,11 19,14 16,17 13,14" fill="#d8b4fe"/>
+                </svg>
+            </div>
             <span class="nav-tab-label">Vanilla</span>
         </div>
+        
+        <!-- 4. UHC -->
         <div class="nav-tab" data-mode="uhc">
-            <div class="nav-tab-icon-wrapper"><svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.5 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg></div>
+            <div class="nav-tab-icon-wrapper">
+                <svg viewBox="0 0 32 32">
+                    <path d="M16 28.5S3 20.2 3 11.2A7.2 7.2 0 0 1 10.2 4c2.8 0 5.2 2 5.8 4.7.6-2.7 3-4.7 5.8-4.7A7.2 7.2 0 0 1 29 11.2c0 9-13 17.3-13 17.3z" fill="#ef4444"/>
+                    <path d="M7 9.5a2.5 2.5 0 0 1 2.5-2.5" stroke="#fca5a5" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+                    <path d="M11 15h10M13 18h6M15 21h2" stroke="#7f1d1d" stroke-width="1.5" stroke-linecap="round"/>
+                </svg>
+            </div>
             <span class="nav-tab-label">UHC</span>
         </div>
+        
+        <!-- 5. Pot -->
         <div class="nav-tab" data-mode="pot">
-            <div class="nav-tab-icon-wrapper"><svg viewBox="0 0 24 24"><path d="M19 4h-2V2H7v2H5c-1.1 0-2 .9-2 2v3c0 5.5 4.5 10 10 10h1v3h-4v2h10v-2h-4v-3h1c5.5 0 10-4.5 10-10V6c0-1.1-.9-2-2-2zm-2 5c0 3.87-3.13 7-7 7H9.46c-2.77-1.15-4.74-3.74-4.94-6.85L4.5 6h12.5v3z"/></svg></div>
+            <div class="nav-tab-icon-wrapper">
+                <svg viewBox="0 0 32 32">
+                    <path d="M13 3h6v4h-6z" fill="#cbd5e1"/>
+                    <path d="M11 9h10v3l5 7v8a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2v-8l5-7z" fill="none" stroke="#f1f5f9" stroke-width="2.5"/>
+                    <path d="M8 18l4-5h8l4 5v7H8z" fill="#f43f5e"/>
+                    <ellipse cx="13" cy="16" rx="2" ry="1" fill="#fff" opacity="0.6"/>
+                </svg>
+            </div>
             <span class="nav-tab-label">Pot</span>
         </div>
+        
+        <!-- 6. NethOP -->
         <div class="nav-tab" data-mode="nethop">
-            <div class="nav-tab-icon-wrapper"><svg viewBox="0 0 24 24"><path d="M12 22C6.49 22 2 17.51 2 12S6.49 2 12 2s10 4.49 10 10-4.49 10-10 10zm0-18c-4.41 0-8 3.59-8 8s3.59 8 8 8 8-3.59 8-8-3.59-8-8-8zm3.5 6.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm-7 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm7 4.5c-.4 1.74-1.95 3-3.8 3s-3.4-1.26-3.8-3h7.6z"/></svg></div>
+            <div class="nav-tab-icon-wrapper">
+                <svg viewBox="0 0 32 32">
+                    <path d="M6 12v6c0 5.5 4.5 10 10 10s10-4.5 10-10v-6l-10-4z" fill="#a78bfa"/>
+                    <path d="M13 22h6v3h-6zM6 13h4v4H6zm16 0h4v4h-4z" fill="#7c3aed"/>
+                </svg>
+            </div>
             <span class="nav-tab-label">NethOP</span>
         </div>
+        
+        <!-- 7. SMP -->
         <div class="nav-tab" data-mode="smp">
-            <div class="nav-tab-icon-wrapper"><svg viewBox="0 0 24 24"><path d="M12 2c1.1 0 2 .9 2 2v2.1c3.9.5 7 3.6 7.5 7.5H22c1.1 0 2 .9 2 2s-.9 2-2 2h-2.1c-.5 3.9-3.6 7-7.5 7.5V22c0 1.1-.9 2-2 2s-2-.9-2-2v-2.1c-3.9-.5-7-3.6-7.5-7.5H2c-1.1 0-2-.9-2-2s.9-2 2-2h2.1C4.6 9.7 7.7 6.6 11.6 6.1V4c0-1.1.9-2 2-2zm0 6.2c-2.8 0-5 2.2-5 5s2.2 5 5 5 5-2.2 5-5-2.2-5-5-5z"/></svg></div>
+            <div class="nav-tab-icon-wrapper">
+                <svg viewBox="0 0 32 32">
+                    <circle cx="16" cy="16" r="10" fill="#042f2e" stroke="#14b8a6" stroke-width="2.5"/>
+                    <ellipse cx="14" cy="14" rx="4" ry="3" fill="#0d9488"/>
+                    <circle cx="12" cy="12" r="1.5" fill="#ccfbf1"/>
+                </svg>
+            </div>
             <span class="nav-tab-label">SMP</span>
         </div>
+        
+        <!-- 8. Sword -->
         <div class="nav-tab" data-mode="sword">
-            <div class="nav-tab-icon-wrapper"><svg viewBox="0 0 24 24"><path d="M21.12 3.54c-.78-.78-2.05-.78-2.83 0l-4.24 4.24 1.41 1.41 4.24-4.24c.78-.78.78-2.05 0-2.82zM12.63 9.19l-7.78 7.78-1.41-1.41 7.78-7.78 1.41 1.41zm-4.24 6.36l-3.54 3.54v1.41h1.41l3.54-3.54-1.41-1.41z"/></svg></div>
+            <div class="nav-tab-icon-wrapper">
+                <svg viewBox="0 0 32 32">
+                    <path d="M26.8 5.2a2.5 2.5 0 0 0-3.5 0L10.5 18l-1.4-1.4a1 1 0 0 0-1.4 0l-3 3a1 1 0 0 0 0 1.4l2.1 2.1-2.1 2.1a1 1 0 0 0 0 1.4l1.4 1.4a1 1 0 0 0 1.4 0l2.1-2.1 2.1 2.1a1 1 0 0 0 1.4 0l3-3a1 1 0 0 0 0-1.4L14 21.5l12.8-12.8a2.5 2.5 0 0 0 0-3.5z" fill="#38bdf8"/>
+                    <path d="M8.5 23.5l-3-3" stroke="#0369a1" stroke-width="2"/>
+                </svg>
+            </div>
             <span class="nav-tab-label">Sword</span>
         </div>
+        
+        <!-- 9. Axe -->
         <div class="nav-tab" data-mode="axe">
-            <div class="nav-tab-icon-wrapper"><svg viewBox="0 0 24 24"><path d="M14.94 4.66l4.4 4.4-1.42 1.42-4.4-4.4 1.42-1.42zM4.22 15.38l7.78-7.78 1.41 1.41-7.78 7.78-1.41-1.41zm3.54 3.54l-3.54 3.54h-1.41v-1.41l3.54-3.54 1.41 1.41z"/></svg></div>
+            <div class="nav-tab-icon-wrapper">
+                <svg viewBox="0 0 32 32">
+                    <path d="M7 25L23 9l-2-2L5 23z" fill="#78716c"/>
+                    <path d="M20 5l8 4-3 5-6-3z" fill="#38bdf8"/>
+                    <path d="M16 8l5 5-2 3-5-4z" fill="#0284c7"/>
+                </svg>
+            </div>
             <span class="nav-tab-label">Axe</span>
         </div>
+        
+        <!-- 10. Mace -->
         <div class="nav-tab" data-mode="mace">
-            <div class="nav-tab-icon-wrapper"><svg viewBox="0 0 24 24"><path d="M8 2h8v3H8V2zm0 17h8v3H8v-3zm3-11h2v6h-2V8zm-5 7V9h3v6H6zm9 0V9h3v6h-3z"/></svg></div>
+            <div class="nav-tab-icon-wrapper">
+                <svg viewBox="0 0 32 32">
+                    <path d="M7 25L21 11" stroke="#78716c" stroke-width="3" stroke-linecap="round"/>
+                    <rect x="18" y="5" width="9" height="9" rx="2" transform="rotate(45 22.5 9.5)" fill="#64748b"/>
+                    <path d="M20 4l8 8" stroke="#475569" stroke-width="2"/>
+                </svg>
+            </div>
             <span class="nav-tab-label">Mace</span>
         </div>
     </div>
@@ -559,124 +504,170 @@
             <div>Region</div>
             <div class="text-right" id="matrix-header-title">Tiers Matrix</div>
         </div>
-
-        <div class="leaderboard-list" id="leaderboard-container"></div>
+        <div class="leaderboard-list" id="leaderboard-container">Syncing network streams...</div>
     </div>
 </div>
 
+<!-- Profile Details Modal -->
 <div class="modal-mask" id="profile-modal-mask" onclick="closeProfile()">
     <div class="profile-modal" onclick="event.stopPropagation()">
         <button class="close-btn" onclick="closeProfile()">×</button>
-        
         <div class="profile-top">
-            <div class="profile-avatar-wrapper">
-                <img id="p-avatar" src="" class="profile-avatar" alt="Skin Head">
-            </div>
+            <div class="profile-avatar-wrapper"><img id="p-avatar" src="" class="profile-avatar" alt="Skin Head"></div>
             <div class="profile-meta">
                 <h2 id="p-username">---</h2>
                 <div><span id="p-region" class="region-badge">---</span></div>
                 <div class="badge-strip" id="p-badges"></div>
             </div>
         </div>
-
         <div class="stats-grid">
-            <div class="stat-card">
-                <div class="label">Overall Tier</div>
-                <div class="value" id="p-stat-tier" style="color:var(--color-ht);">---</div>
-            </div>
-            <div class="stat-card">
-                <div class="label">Win / Loss</div>
-                <div class="value" id="p-stat-wl">0.0</div>
-            </div>
-            <div class="stat-card">
-                <div class="label">Matches</div>
-                <div class="value" id="p-stat-matches">0</div>
-            </div>
-            <div class="stat-card">
-                <div class="label">Peak Elo</div>
-                <div class="value" id="p-stat-elo" style="color:#38bdf8;">0</div>
-            </div>
-            <div class="stat-card" style="grid-column: span 2;">
-                <div class="label">Rank History</div>
-                <div class="value" style="font-size:13px; color:var(--text-muted); font-weight:500; margin-top:4px;">📈 Consistent Peak Tier Status</div>
-            </div>
+            <div class="stat-card"><div class="label">Overall Tier</div><div class="value" id="p-stat-tier" style="color:var(--color-ht);">---</div></div>
+            <div class="stat-card"><div class="label">Win / Loss</div><div class="value" id="p-stat-wl">0.0</div></div>
+            <div class="stat-card"><div class="label">Matches</div><div class="value" id="p-stat-matches">0</div></div>
+            <div class="stat-card"><div class="label">Peak Elo</div><div class="value" id="p-stat-elo" style="color:var(--accent);">0</div></div>
+            <div class="stat-card" style="grid-column: span 2;"><div class="label">Rank Status</div><div class="value" style="font-size:12px; color:var(--text-muted); font-weight:500; margin-top:4px;">📈 Verified Paradox League Record</div></div>
         </div>
-
         <div class="all-modes-header">All Gamemode Tiers</div>
         <div class="all-modes-grid" id="p-modes-grid"></div>
     </div>
 </div>
 
 <script>
-    // Configured Database featuring your specified top layout structure
-    const playersDatabase = [
+    const SYNC_ID = "PARADOX_PVP_LIVE_SYNC_v2"; 
+    const SYNC_INTERVAL_MS = 1500; 
+
+    // TikTok Background Controls
+    window.addEventListener('message', function(e) {
+        if (e.origin.includes('tiktok.com')) {
+            try {
+                const data = JSON.parse(e.data);
+                if (data.type === 'ready') {
+                    document.getElementById('bg-video').contentWindow.postMessage(JSON.stringify({ type: 'setVolume', value: 0.18 }), '*');
+                }
+            } catch(err) {}
+        }
+    });
+
+    document.addEventListener('click', () => {
+        const iframe = document.getElementById('bg-video');
+        if(iframe) {
+            iframe.contentWindow.postMessage(JSON.stringify({ type: 'play' }), '*');
+            iframe.contentWindow.postMessage(JSON.stringify({ type: 'setVolume', value: 0.18 }), '*');
+        }
+    }, { once: true });
+
+    const DEFAULT_PLAYERS = [
         { 
-            name: "ITZREALHARRY", 
-            region: "EU", 
-            points: 420, 
-            status: "Grandmaster", 
-            badges: ["staff", "top10", "tourney"],
-            wl: "4.82",
-            matches: 1240,
-            peakElo: 2450,
+            name: "ITZREALHARRY", region: "EU", points: 420, status: "Grandmaster", badges: ["staff", "top10", "tourney"], wl: "4.82", matches: 1240, peakElo: 2450,
             tiers: { overall: "HT1", ltms: "HT1", vanilla: "HT1", uhc: "HT1", pot: "HT1", nethop: "HT1", smp: "HT2", sword: "HT1", axe: "HT1", mace: "HT1" }
         },
         { 
-            name: "ZenithTG", 
-            region: "NA", 
-            points: 395, 
-            status: "Elite Combatant", 
-            badges: ["top10", "tourney"],
-            wl: "3.50",
-            matches: 980,
-            peakElo: 2210,
+            name: "ZenithTG", region: "NA", points: 395, status: "Elite Combatant", badges: ["top10", "tourney"], wl: "3.50", matches: 980, peakElo: 2210,
             tiers: { overall: "HT2", ltms: "HT2", vanilla: "HT1", uhc: "HT2", pot: "LT1", nethop: "HT2", smp: "HT1", sword: "HT1", axe: "LT1", mace: "HT2" }
         }
     ];
 
+    let playersDatabase = [];
     const container = document.getElementById('leaderboard-container');
     const headerTitle = document.getElementById('matrix-header-title');
     const tabs = document.querySelectorAll('.nav-tab');
+    let currentActiveMode = 'overall';
+
+    async function pullDatabaseUpdate() {
+        try {
+            const localData = localStorage.getItem(`paradox_sync_${SYNC_ID}`);
+            if (localData) {
+                const incomingData = JSON.parse(localData);
+                if (JSON.stringify(incomingData) !== JSON.stringify(playersDatabase)) {
+                    playersDatabase = incomingData;
+                    renderLeaderboard(currentActiveMode);
+                }
+            } else if (playersDatabase.length === 0) {
+                playersDatabase = DEFAULT_PLAYERS;
+                localStorage.setItem(`paradox_sync_${SYNC_ID}`, JSON.stringify(playersDatabase));
+                renderLeaderboard(currentActiveMode);
+            }
+        } catch (e) {
+            if (playersDatabase.length === 0) {
+                playersDatabase = DEFAULT_PLAYERS;
+                renderLeaderboard(currentActiveMode);
+            }
+        }
+    }
+
+    window.addEventListener('storage', () => {
+        const localData = localStorage.getItem(`paradox_sync_${SYNC_ID}`);
+        if (localData) {
+            playersDatabase = JSON.parse(localData);
+            renderLeaderboard(currentActiveMode);
+        }
+    });
 
     function renderLeaderboard(mode) {
+        currentActiveMode = mode;
         container.innerHTML = '';
-        headerTitle.textContent = mode === 'overall' ? 'Tiers Matrix' : `${mode} Tier`;
+        headerTitle.textContent = mode === 'overall' ? 'Tiers Matrix' : `${mode.toUpperCase()} TIER`;
+
+        if (!playersDatabase || playersDatabase.length === 0) {
+            container.innerHTML = '<div class="no-data-msg">No active combat records found.</div>';
+            return;
+        }
 
         let sortedPlayers = [...playersDatabase];
-        if (mode !== 'overall') {
-            sortedPlayers.sort((a, b) => a.tiers[mode].localeCompare(b.tiers[mode]));
+        if (mode === 'overall') {
+            sortedPlayers.sort((a, b) => b.points - a.points);
+        } else {
+            sortedPlayers.sort((a, b) => {
+                const tierA = a.tiers[mode] || "LT3";
+                const tierB = b.tiers[mode] || "LT3";
+                return tierA.localeCompare(tierB);
+            });
         }
 
         sortedPlayers.forEach((player, index) => {
             const row = document.createElement('div');
-            row.className = `row-grid player-row`;
+            
+            if (mode === 'vanilla') {
+                row.className = `row-grid player-row vanilla-styled`;
+            } else {
+                row.className = `row-grid player-row`;
+            }
+            
             row.setAttribute('onclick', `openProfile("${player.name}")`);
             
             let tierDisplayHTML = '';
             if (mode === 'overall') {
                 tierDisplayHTML = `
                     <div class="tier-matrix-row">
-                        <div class="tier-node node-ht">⚔️ ${player.tiers.ltms}</div>
-                        <div class="tier-node node-ht">💎 ${player.tiers.vanilla}</div>
-                        <div class="tier-node node-lt">🧪 ${player.tiers.pot}</div>
+                        <div class="tier-node node-ht">⚔️ ${player.tiers.ltms || 'LT1'}</div>
+                        <div class="tier-node node-vanilla-ht">💎 ${player.tiers.vanilla || 'LT1'}</div>
+                        <div class="tier-node node-lt">🧪 ${player.tiers.pot || 'LT1'}</div>
                     </div>`;
             } else {
-                const specificTier = player.tiers[mode];
+                const specificTier = player.tiers[mode] || "LT3";
                 const isHighTier = specificTier.startsWith('HT');
-                tierDisplayHTML = `
-                    <div class="tier-matrix-row">
-                        <div class="tier-node ${isHighTier ? 'node-ht' : 'node-lt'}">${specificTier}</div>
-                    </div>`;
+                
+                if (mode === 'vanilla') {
+                    tierDisplayHTML = `
+                        <div class="tier-matrix-row">
+                            <div class="tier-node node-vanilla-ht">💎 ${specificTier}</div>
+                        </div>`;
+                } else {
+                    tierDisplayHTML = `
+                        <div class="tier-matrix-row">
+                            <div class="tier-node ${isHighTier ? 'node-ht' : 'node-lt'}">${specificTier}</div>
+                        </div>`;
+                }
             }
 
             row.innerHTML = `
-                <div class="rank-label">${index + 1}</div>
-                <div class="skin-box">
-                    <img src="https://mc-heads.net/head/${player.name}/100" class="skin-avatar" alt="${player.name}">
+                <div class="rank-label">#${index + 1}</div>
+                <div class="skin-box ${mode === 'vanilla' ? 'vanilla-frame' : ''}">
+                    <img src="https://mc-heads.net/head/${player.name}/100" class="skin-avatar" alt="head">
                 </div>
                 <div class="player-identity">
                     <span class="username">${player.name}</span>
-                    <span class="rank-status">${player.status} <span class="points">(${player.points} pts)</span></span>
+                    <span class="rank-status">${player.status || 'Challenger'} — <span class="points">${player.points} ELO</span></span>
                 </div>
                 <div><span class="region-badge reg-${player.region.toLowerCase()}">${player.region}</span></div>
                 ${tierDisplayHTML}
@@ -685,9 +676,8 @@
         });
     }
 
-    // Modal Control Logic
     function openProfile(username) {
-        const player = playersDatabase.find(p => p.name === username);
+        const player = playersDatabase.find(p => p.name.toLowerCase() === username.toLowerCase());
         if (!player) return;
 
         document.getElementById('p-avatar').src = `https://mc-heads.net/head/${player.name}/100`;
@@ -697,23 +687,20 @@
         regNode.textContent = player.region;
         regNode.className = `region-badge reg-${player.region.toLowerCase()}`;
 
-        // Dynamic Badge rendering
         const badgeBox = document.getElementById('p-badges');
         badgeBox.innerHTML = '';
-        player.badges.forEach(b => {
+        (player.badges || []).forEach(b => {
             const span = document.createElement('span');
             span.className = `badge-node b-${b}`;
             span.textContent = b === 'top10' ? 'Top 10' : b === 'tourney' ? 'Champion' : b;
             badgeBox.appendChild(span);
         });
 
-        // Numerical Metric Loading
-        document.getElementById('p-stat-tier').textContent = player.tiers.overall;
-        document.getElementById('p-stat-wl').textContent = player.wl;
-        document.getElementById('p-stat-matches').textContent = player.matches;
-        document.getElementById('p-stat-elo').textContent = player.peakElo;
+        document.getElementById('p-stat-tier').textContent = player.tiers.overall || "LT1";
+        document.getElementById('p-stat-wl').textContent = player.wl || "1.00";
+        document.getElementById('p-stat-matches').textContent = player.matches || "0";
+        document.getElementById('p-stat-elo').textContent = player.peakElo || player.points * 5;
 
-        // Populate Comprehensive Gamemode breakdown
         const grid = document.getElementById('p-modes-grid');
         grid.innerHTML = '';
         Object.entries(player.tiers).forEach(([mode, tier]) => {
@@ -729,9 +716,7 @@
         document.getElementById('profile-modal-mask').classList.add('open');
     }
 
-    function closeProfile() {
-        document.getElementById('profile-modal-mask').classList.remove('open');
-    }
+    function closeProfile() { document.getElementById('profile-modal-mask').classList.remove('open'); }
 
     tabs.forEach(tab => {
         tab.addEventListener('click', () => {
@@ -741,7 +726,9 @@
         });
     });
 
-    renderLeaderboard('overall');
+    pullDatabaseUpdate().then(() => {
+        setInterval(pullDatabaseUpdate, SYNC_INTERVAL_MS);
+    });
 </script>
 
 </body>
